@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine ❤️</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Georgia', serif;
+    background: url('https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(102, 126, 234, 0.3);
+    z-index: 1;
+  }
+  
+  /* Floating hearts animation */
+  .heart {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0;
+    animation: float 4s ease-in infinite;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+  
+  .container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3rem 2.5rem;
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    z-index: 10;
+    animation: slideIn 0.8s ease-out;
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .rose {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: sway 2s ease-in-out infinite;
+  }
+  
+  @keyframes sway {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+  }
+  
+  h1 {
+    color: #e91e63;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+  
+  .message {
+    color: #555;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    font-style: italic;
+  }
+  
+  #yesBtn {
+    font-size: 1.4rem;
+    padding: 18px 60px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+    transition: all 0.3s ease;
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  
+  #yesBtn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(245, 87, 108, 0.6);
+  }
+  
+  #yesBtn:active {
+    transform: translateY(-1px);
+  }
+  
+  #noBtn {
+    font-size: 1.2rem;
+    padding: 15px 50px;
+    border: 2px solid #999;
+    border-radius: 50px;
+    cursor: pointer;
+    background: white;
+    color: #666;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 1rem;
+    position: absolute;
+  }
+  
+  #noBtn:hover {
+    border-color: #e91e63;
+    color: #e91e63;
+  }
+  
+  .button-container {
+    margin-top: 2rem;
+    position: relative;
+    min-height: 100px;
+  }
+  
+  /* Ring animation */
+  .ring {
+    font-size: 5rem;
+    animation: ringSparkle 2s ease-in-out infinite;
+    margin: 2rem 0;
+  }
+  
+  @keyframes ringSparkle {
+    0%, 100% { 
+      transform: rotate(-10deg) scale(1);
+      filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+    }
+    50% { 
+      transform: rotate(10deg) scale(1.1);
+      filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1));
+    }
+  }
+  
+  /* Success state */
+  #success {
+    display: none;
+    text-align: center;
+    animation: celebrate 0.6s ease-out;
+  }
+  
+  @keyframes celebrate {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  #success h1 {
+    font-size: 3.5rem;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    margin-bottom: 1rem;
+  }
+  
+  #success p {
+    font-size: 1.8rem;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  }
+  
+  .hearts-burst {
+    font-size: 3rem;
+    margin: 2rem 0;
+    animation: pulse 1s ease infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating hearts background -->
+<div id="heartsContainer"></div>
+
+<div class="container" id="mainCard">
+  <div class="rose">🌹</div>
+  <h1>Will You Be My Valentine?</h1>
+  <p class="message">
+    I've been thinking about you, and I'd love nothing more than to spend Valentine's Day with you. 
+    You make every moment brighter. 💕
+  </p>
+  <div class="button-container">
+    <button id="yesBtn" onclick="sayYes()">Yes! ❤️</button>
+    <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
+  </div>
+</div>
+
+<div id="success">
+  <h1>I Am Lucky to Have You in My Life ❤️</h1>
+  <div class="ring">💍</div>
+  <div class="hearts-burst">❤️ 💕 💖 💗 💓</div>
+</div>
+
+<script>
+  // Create floating hearts
+  function createHeart() {
+    const heartsContainer = document.getElementById('heartsContainer');
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.innerHTML = ['❤️', '💕', '💖', '💗', '💓'][Math.floor(Math.random() * 5)];
+    heart.style.left = Math.random() * 100 + '%';
+    heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+    heart.style.animationDelay = Math.random() * 2 + 's';
+    heartsContainer.appendChild(heart);
+    
+    setTimeout(() => heart.remove(), 6000);
+  }
+  
+  // Generate hearts periodically
+  setInterval(createHeart, 400);
+  
+  function moveButton() {
+    const noBtn = document.getElementById('noBtn');
+    const container = document.querySelector('.container');
+    const containerRect = container.getBoundingClientRect();
+    
+    // Get random position within container bounds
+    const maxX = containerRect.width - noBtn.offsetWidth - 40;
+    const maxY = 200; // Limit vertical movement
+    
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+    
+    noBtn.style.left = randomX + 'px';
+    noBtn.style.top = randomY + 'px';
+  }
+  
+  function sayYes() {
+    document.getElementById('mainCard').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+    document.body.style.background = "url('https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover";
+    
+    // Update overlay for celebration
+    const overlay = document.querySelector('body::before');
+    document.body.style.position = 'relative';
+    
+    // Create celebration hearts burst
+    for (let i = 0; i < 30; i++) {
+      setTimeout(createHeart, i * 100);
+    }
+  }
+</script>
+
+</body>
+</html>
